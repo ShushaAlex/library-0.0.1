@@ -2,6 +2,9 @@ package com.example.library001.service.impl;
 
 import com.example.library001.entity.Book;
 import com.example.library001.entity.Student;
+import com.example.library001.repository.impl.BookRepository;
+import com.example.library001.repository.impl.StudentBookRepository;
+import com.example.library001.repository.impl.StudentRepository;
 import com.example.library001.service.BookService;
 
 import java.util.List;
@@ -15,14 +18,9 @@ public class BookServiceImpl implements BookService {
     private StudentBookRepository studentBookRepository;
     @Override
     public Book saveBook(Book book) {
+
        return bookRepository.save(book);
     }
-
-    @Override
-    public void removeBook(Book book) {
-
-    }
-
     @Override
     public Book borrowBook(int bookId, int studentId) {
 
@@ -41,11 +39,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book returnBook(int bookId) {
-
         Book book = findBookById(bookId);
-        Student student = studentRepository.findStudentById(studentId);
-
-        if(book != null && !book.isAvailable() && student != null) {
+        if(book != null && !book.isAvailable()){
             book.setAvailable(true);
             studentBookRepository.update(bookId);
 
@@ -57,11 +52,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBooksList() {
+
         return bookRepository.getBooksList();
     }
 
     @Override
     public Book findBookById(int bookId) {
+
         return bookRepository.findBookById(bookId);
     }
 }
