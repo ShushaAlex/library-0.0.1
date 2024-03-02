@@ -11,4 +11,9 @@ public class StudentBook {
     private LocalDate borrowDate;
     private LocalDate returnDate;
 
+    public StudentBook(int studentId, int bookId) {
+        this.studentId = studentId;
+        this.bookId = bookId;
+        this.borrowDate = LocalDate.now();
+    }
 }

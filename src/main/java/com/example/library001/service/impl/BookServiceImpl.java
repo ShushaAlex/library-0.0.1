@@ -6,16 +6,21 @@ import com.example.library001.repository.impl.BookRepository;
 import com.example.library001.repository.impl.StudentBookRepository;
 import com.example.library001.repository.impl.StudentRepository;
 import com.example.library001.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
+@Component
 public class BookServiceImpl implements BookService {
-    //@Autowired
-    private BookRepository bookRepository;
-    //@Autowired
-    private StudentRepository studentRepository;
-    //@Autowired
-    private StudentBookRepository studentBookRepository;
+    @Autowired
+    private BookRepository bookRepository = new BookRepository();
+    @Autowired
+    private StudentRepository studentRepository = StudentRepository.getInstance();
+    @Autowired
+    private StudentBookRepository studentBookRepository = new StudentBookRepository();
+
     @Override
     public Book saveBook(Book book) {
 
@@ -27,14 +32,15 @@ public class BookServiceImpl implements BookService {
         Book book = findBookById(bookId);
         Student student = studentRepository.findStudentById(studentId);
 
-        if(book != null && book.isAvailable() && student != null) {
+        if (book != null && book.isAvailable() && student != null) {
             book.setAvailable(false);
-            studentBookRepository.save(bookId, studentId, true);
+            studentBookRepository.save(bookId, studentId);
 
-            return saveBook(book);
+            return book;
+        } else {
+
+            throw new NoSuchElementException("BookServiceImpl");
         }
-
-        return null;
     }
 
     @Override
