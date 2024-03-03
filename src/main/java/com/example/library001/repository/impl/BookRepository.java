@@ -9,6 +9,13 @@ import java.util.List;
 
 @Component
 public class BookRepository implements BookRepositoryService {
+    private static BookRepository INSTANCE = null;
+    public static BookRepository GET_INSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new BookRepository();
+        }
+        return INSTANCE;
+    }
     private List<Book> bookList = new ArrayList<>();
     @Override
     public Book save(Book book) {

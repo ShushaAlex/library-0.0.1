@@ -12,7 +12,7 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    private StudentRepository studentRepository = StudentRepository.getInstance();
+    private StudentRepository studentRepository = StudentRepository.GET_INSTANCE();
 
     @Override
     public Student save(Student student) {

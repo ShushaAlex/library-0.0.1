@@ -15,11 +15,11 @@ import java.util.NoSuchElementException;
 @Component
 public class BookServiceImpl implements BookService {
     @Autowired
-    private BookRepository bookRepository = new BookRepository();
+    private BookRepository bookRepository = BookRepository.GET_INSTANCE();
     @Autowired
-    private StudentRepository studentRepository = StudentRepository.getInstance();
+    private StudentRepository studentRepository = StudentRepository.GET_INSTANCE();
     @Autowired
-    private StudentBookRepository studentBookRepository = new StudentBookRepository();
+    private StudentBookRepository studentBookRepository = StudentBookRepository.GET_INSTANCE();
 
     @Override
     public Book saveBook(Book book) {

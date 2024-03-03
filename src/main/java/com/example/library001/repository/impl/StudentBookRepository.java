@@ -12,6 +12,15 @@ import java.util.NoSuchElementException;
 @Component
 public class StudentBookRepository implements StudentBookRepositoryService {
 
+    private static StudentBookRepository INSTANCE = null;
+
+    public static StudentBookRepository GET_INSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new StudentBookRepository();
+        }
+        return INSTANCE;
+    }
+
     private List<StudentBook> studentBooksList = new ArrayList<>();
 
     @Override
@@ -24,7 +33,7 @@ public class StudentBookRepository implements StudentBookRepositoryService {
             return studentBookCheck;
         } else {
 
-            return studentBookCheck;
+            return null;
         }
     }
 
@@ -38,6 +47,11 @@ public class StudentBookRepository implements StudentBookRepositoryService {
         }
 
         throw new NoSuchElementException("This book is not borrowed");
+    }
+
+    @Override
+    public List<StudentBook> getStudentBookList() {
+        return List.copyOf(studentBooksList);
     }
 
     private StudentBook hasBorrowedStudentBook(int bookId) {

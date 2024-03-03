@@ -11,7 +11,7 @@ import java.util.List;
 public class StudentRepository implements StudentRepositoryService {
 
     private static StudentRepository INSTANCE = null;
-    public static StudentRepository getInstance() {
+    public static StudentRepository GET_INSTANCE() {
         if (INSTANCE == null) {
             INSTANCE = new StudentRepository();
         }

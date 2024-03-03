@@ -2,6 +2,8 @@ package com.example.library001;
 
 import com.example.library001.entity.Book;
 import com.example.library001.entity.Student;
+import com.example.library001.repository.StudentBookRepositoryService;
+import com.example.library001.repository.impl.StudentBookRepository;
 import com.example.library001.service.BookService;
 import com.example.library001.service.StudentService;
 import com.example.library001.service.impl.BookServiceImpl;
@@ -19,12 +21,15 @@ public class Application {
 		Book book = new Book(1, "Java", "Arnold A.");
 		BookService bookService = new BookServiceImpl();
 		StudentService studentService = new StudentServiceImpl();
+		StudentBookRepositoryService studentBook = StudentBookRepository.GET_INSTANCE();
 
 		System.out.println("Add student: " + studentService.save(student));
 		System.out.println("Save book: " + bookService.saveBook(book));
 		System.out.println("Borrow: " + bookService.borrowBook(book.getId(), student.getId()));
-		System.out.println("Return: " + bookService.returnBook(book.getId()));;
-		System.out.println(bookService.getBooksList());
+		System.out.println("StudentBooks list after borrow : " + studentBook.getStudentBookList());
+		System.out.println("Return: " + bookService.returnBook(book.getId()));
+		System.out.println("StudentBooks list after return : " + studentBook.getStudentBookList());
+
 
 	}
 
