@@ -19,8 +19,8 @@ public class StudentController {
         return studentService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Student findByID(long id) {
+    @GetMapping("/")
+    public Student findByID(@RequestParam Long id) {
         return studentService.findByID(id);
     }
 

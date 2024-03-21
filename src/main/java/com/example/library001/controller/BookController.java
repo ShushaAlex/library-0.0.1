@@ -23,9 +23,14 @@ public class BookController {
         log.info("hello");
         return bookService.findAll();
     }
+//    @GetMapping("/{id}")
+//    public Book getBook(@PathVariable Long id) {
+//        log.info(String.valueOf(id));
+//        return bookService.findByID(id);
+//    }
 
-    @GetMapping("/{id}")
-    public Book getBook(@PathVariable Long id) {
+    @GetMapping("/")
+    public Book getBook(@RequestParam Long id) {
         log.info(String.valueOf(id));
         return bookService.findByID(id);
     }
