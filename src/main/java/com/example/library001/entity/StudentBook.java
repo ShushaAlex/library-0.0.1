@@ -19,9 +19,13 @@ public class StudentBook {
     private LocalDate borrowDate;
     private LocalDate returnDate;
 
-//    public StudentBook(int studentId, int bookId) {
-//        this.studentId = studentId;
-//        this.bookId = bookId;
-//        this.borrowDate = LocalDate.now();
-//    }
+    public StudentBook(Long studentId, Long bookId, LocalDate borrowDate) {
+        this.studentId = studentId;
+        this.bookId = bookId;
+        this.borrowDate = borrowDate;
+    }
+
+    public StudentBook() {
+
+    }
 }

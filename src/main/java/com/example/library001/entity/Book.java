@@ -14,21 +14,5 @@ public class Book {
     private Long id;
     private String title;
     private String author;
-//    private boolean isAvailable;
-
-//    public Book(Long id, String title, String author) {
-//        this.id = id;
-//        this.title = title;
-//        this.author = author;
-//        this.isAvailable = true;
-//    }
-
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
+    private boolean isAvailable = true;
 }
