@@ -27,7 +27,7 @@ public class BookController {
     }
 
     @GetMapping("/")
-    public Book getBook(@RequestParam Long id) {
+    public Book getBook(@RequestParam Long id) throws NoBookException {
         log.info(String.valueOf(id));
         return bookService.findByID(id);
     }
