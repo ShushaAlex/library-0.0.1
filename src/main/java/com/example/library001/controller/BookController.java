@@ -2,10 +2,13 @@ package com.example.library001.controller;
 
 import com.example.library001.entity.Book;
 import com.example.library001.entity.StudentBook;
+import com.example.library001.exception.NoBookException;
 import com.example.library001.service.impl.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    //TODO add exception message to http response
     @GetMapping
     public List<Book> getAllBooks() {
         return bookService.findAll();
@@ -33,8 +37,9 @@ public class BookController {
         log.info(title);
         try {
             return bookService.findByTitle(title);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (NoBookException exc) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, exc.getMessage(), exc);
         }
     }
 

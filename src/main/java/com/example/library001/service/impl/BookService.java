@@ -2,6 +2,7 @@ package com.example.library001.service.impl;
 
 import com.example.library001.entity.Book;
 import com.example.library001.entity.StudentBook;
+import com.example.library001.exception.NoBookException;
 import com.example.library001.repository.BookRepository;
 import com.example.library001.repository.StudentBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class BookService {
     @Autowired
     private StudentBookRepository studentBookRepository;
 
+    //TODO refactor methods with Query
     public List<Book> findAll() {
 
         return bookRepository.findAll();
@@ -33,17 +35,25 @@ public class BookService {
         return bookRepository.findById(id).orElse(null);
     }
 
-    public Book findByTitle(String title) throws Exception {
-        List<Book> books = findAll();
-        Book book = books.stream()
-                .filter(x -> x.getTitle().equals(title))
-                .findFirst().orElse(null);
-        if (book != null) {
-
+    public Book findByTitle(String title) throws NoBookException {
+        Book book = bookRepository.findByTitle(title);
+        if (book != null){
             return book;
         } else {
-            throw new Exception("There is no such book");
+            throw new NoBookException("There is no book '" + title + "' in the lib");
         }
+
+
+//        List<Book> books = findAll();
+//        Book book = books.stream()
+//                .filter(x -> x.getTitle().equals(title))
+//                .findFirst().orElse(null);
+//        if (book != null) {
+//
+//            return book;
+//        } else {
+//            throw new Exception("There is no such book");
+//        }
     }
 
     public Book save(Book book) {
